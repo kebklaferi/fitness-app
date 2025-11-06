@@ -1,50 +1,9 @@
 import { CheckCircle } from "lucide-react";
-import { useState } from "react";
 import Footer from "../components/Footer";
 import PonudbaSection from "../components/PonudbaSection";
 import HeroSection from "../components/HeroSection";
 
 const Ponudba = () => {
-    const [offers] = useState([
-        {
-            id: 1,
-            title: "Osnovni paket",
-            description: "Dostop do fitnesa 3x na teden, osnovni trening program.",
-            price: "29€/mesec",
-            image: "/images/fitnes1.jpg",
-            features: [
-                "3x obisk tedensko",
-                "Osnovni trening program",
-                "Dostop do garderob in tušev",
-            ],
-        },
-        {
-            id: 2,
-            title: "Napredni paket",
-            description: "Neomejen dostop do fitnesa + skupinske vadbe.",
-            price: "49€/mesec",
-            image: "/images/fitnes2.jpg",
-            features: [
-                "Neomejen dostop do fitnesa",
-                "Skupinske vadbe",
-                "Uporaba savne",
-                "Dostop do mobilne aplikacije",
-            ],
-        },
-        {
-            id: 3,
-            title: "Premium paket",
-            description: "Vse vključeno + osebni trener in prehranski načrt.",
-            price: "79€/mesec",
-            image: "/images/fitnes3.jpg",
-            features: [
-                "Osebni trener",
-                "Prehranski načrt",
-                "Savna in masaža",
-                "Neomejen dostop 24/7",
-            ],
-        },
-    ]);
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-800 flex flex-col">

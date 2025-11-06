@@ -4,6 +4,8 @@ import Ponudba from "./pages/Ponudba";
 import Urnik from "./pages/Urnik";
 import Kalkulator from "./pages/Kalkulator";
 import Footer from "./components/Footer";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/ponudba" element={<Ponudba />} />
         <Route path="/urnik" element={<Urnik />} />
         <Route path="/proteinski-kalkulator" element={<Kalkulator />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
       <Footer />
     </Router>
