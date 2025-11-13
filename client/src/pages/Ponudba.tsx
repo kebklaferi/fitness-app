@@ -185,7 +185,6 @@ const Ponudba = () => {
                     </button>
                 </div>
             </section>
-            <Footer />
         </div>
     );
 };

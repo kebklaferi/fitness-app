@@ -10,24 +10,47 @@ const router = Router();
 // Registration endpoint
 router.post('/', async (req, res) => {
   const { username, password, role } = req.body;
+
   if (!username || !password) {
     return res.status(400).json({ message: 'Username and password required.' });
   }
-  const filePath = path.join(__dirname, '../data/users.json');
+
+  const dataDir = path.join(__dirname, '../data');
+  const filePath = path.join(dataDir, 'users.json');
+
+  // Ensure data folder exists
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
   let users: User[] = [];
+
+  // Read existing users
   try {
     if (fs.existsSync(filePath)) {
       const data = fs.readFileSync(filePath, 'utf-8');
       users = JSON.parse(data);
     }
   } catch (err) {
-    return res.status(500).json({ message: 'Error reading user data.' });
+    console.error('Error reading user data:', err);
+    return res.status(500).json({ message: 'Error reading user data.', error: err });
   }
+
+  // Check if username already exists
   const existingUser = users.find(u => u.username === username);
   if (existingUser) {
     return res.status(409).json({ message: 'Username already exists.' });
   }
-  const passwordHash = await bcrypt.hash(password, 10);
+
+  // Hash password
+  let passwordHash: string;
+  try {
+    passwordHash = await bcrypt.hash(password, 10);
+  } catch (err) {
+    console.error('Error hashing password:', err);
+    return res.status(500).json({ message: 'Error processing password.', error: err });
+  }
+
   const validRoles = ['uporabnik', 'trener', 'admin'];
   const newUser: User = {
     id: uuidv4(),
@@ -35,12 +58,17 @@ router.post('/', async (req, res) => {
     passwordHash,
     role: validRoles.includes(role) ? role : 'uporabnik',
   };
+
   users.push(newUser);
+
+  // Write updated users to file
   try {
     fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
   } catch (err) {
-    return res.status(500).json({ message: 'Error saving user data.' });
+    console.error('Error writing user data:', err);
+    return res.status(500).json({ message: 'Error saving user data.', error: err });
   }
+
   res.status(201).json({ message: 'User registered successfully.' });
 });
 

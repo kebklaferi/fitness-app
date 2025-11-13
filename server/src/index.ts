@@ -1,10 +1,17 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 import authRouter from "./routes/register";
 import loginRouter from "./routes/login";
 
-dotenv.config();
+// Load .env from project root
+const envPath = path.resolve(__dirname, "../.env");
+dotenv.config({ path: envPath });
+
+if (!process.env.JWT_SECRET) {
+  console.warn("⚠️ JWT_SECRET is not defined in .env! Login will fail until it is set.");
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,7 +23,6 @@ app.use(express.json());
 // Routes
 app.use("/api/register", authRouter);
 app.use("/api/login", loginRouter);
-// app.use("/api/offers");
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Wiifit API is running ✅");

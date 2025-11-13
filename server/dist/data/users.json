@@ -1,8 +1,8 @@
 [
   {
-    "id": "ab3fd624-842e-4175-9eba-de0d834fd268",
+    "id": "257cba21-0452-4598-9ab0-01a5d6d07f3e",
     "username": "admin",
-    "passwordHash": "$2b$10$RoAt9tWf4QsuODDOsui1ceYcr3ucSTCkqRdlMRPSmkvWG9Ola9Hfq",
-    "role": "user"
+    "passwordHash": "$2b$10$DBqyELhKTiljbyQK6Y7TFu5Rxw17lAU.kjuud8VROU5L/d199s.dW",
+    "role": "admin"
   }
 ]
