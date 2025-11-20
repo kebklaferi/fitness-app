@@ -6,9 +6,12 @@ import Kalkulator from "./pages/Kalkulator";
 import Footer from "./components/Footer";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
+import { AuthProvider } from "./context/AuthContext";
+import MyProfile from "./pages/MyProfile";
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <NavBar />
       <Routes>
@@ -18,9 +21,11 @@ function App() {
         <Route path="/proteinski-kalkulator" element={<Kalkulator />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/my-profile" element={<MyProfile />} />
       </Routes>
       <Footer />
     </Router>
+    </AuthProvider>
   );
 }
 
